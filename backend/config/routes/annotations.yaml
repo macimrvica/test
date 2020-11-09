@@ -1,0 +1,18 @@
+films:
+    resource: ../../src/Films/Infrastructure/Http
+    type: annotation
+    prefix: '/api'
+
+people:
+    resource: ../../src/People/Infrastructure/Http
+    type: annotation
+    prefix: '/api'
+
+planets:
+    resource: ../../src/Planets/Infrastructure/Http
+    type: annotation
+    prefix: '/api'
+
+kernel:
+    resource: ../../src/Kernel.php
+    type: annotation

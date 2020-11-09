@@ -1,0 +1,47 @@
+version: "3.4"
+
+services:
+
+  php:
+    build:
+      context: .
+      target: symfony_php
+      args:
+        SYMFONY_VERSION: ${SYMFONY_VERSION:-}
+        STABILITY: ${STABILITY:-stable}
+    restart: unless-stopped
+    healthcheck:
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 30s
+    volumes:
+      - ./backend:/srv/app:rw,cached
+      - ./.docker/php/conf.d/symfony.dev.ini:/usr/local/etc/php/conf.d/symfony.ini
+    environment:
+      APP_ENV: dev
+
+  nginx:
+    image: nginx:1.19.0-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./.docker/nginx/star-wars.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./backend:/srv/app:ro
+    depends_on:
+      - php
+
+  node:
+    build:
+      context: .
+      target: symfony_node
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - 3001:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+
