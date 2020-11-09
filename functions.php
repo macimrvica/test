@@ -1,9 +1,7 @@
 <?php declare(strict_types=1);
 
-
 function repeat(array $array): void
 {
-
     $c = count($array);
     $newArray = [];
 
@@ -14,7 +12,7 @@ function repeat(array $array): void
     print_r($newArray);
 }
 
-repeat([1,2,3]);
+repeat([1, 2, 3]);
 
 function reformat(string $input): void
 {
@@ -53,4 +51,4 @@ function next_binary_number(array $number): string
     exit;
 }
 
-next_binary_number([1,0,0,0,0,0,0,0,0,1]);
+next_binary_number([1, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
