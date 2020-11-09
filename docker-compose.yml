@@ -5,6 +5,7 @@ services:
   php:
     build:
       context: .
+      dockerfile: .docker/php/Dockerfile
       target: symfony_php
       args:
         SYMFONY_VERSION: ${SYMFONY_VERSION:-}
@@ -35,6 +36,7 @@ services:
   node:
     build:
       context: .
+      dockerfile: .docker/node/Dockerfile
       target: symfony_node
     volumes:
       - ./frontend:/app
